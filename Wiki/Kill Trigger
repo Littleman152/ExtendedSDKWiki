@@ -11,17 +11,6 @@ When something enters the trigger, the component checks if it's a player or an N
 
 ---
 
-## Inspector fields
-
-| Field | Type | Description |
-|---|---|---|
-| `isKillingPlayer` | `bool` | If checked, the player dies on entering the trigger |
-| `isKillingNPCs` | `bool` | If checked, NPCs die on entering the trigger |
-
-You can enable both, just one, or neither (though neither makes it pretty pointless).
-
----
-
 ## How to set it up
 
 1. Create an empty GameObject in your scene and position/scale it over the area you want to be deadly.
@@ -32,34 +21,9 @@ You can enable both, just one, or neither (though neither makes it pretty pointl
 
 ---
 
-## Example hierarchy
-
-```
-KillFloor
-├── BoxCollider      (Is Trigger = true, scaled to cover the area)
-└── KillTrigger      (isKillingPlayer = true, isKillingNPCs = true)
-```
-
----
-
 ## Common use cases
 
 - **Kill floor / void** — Put a big flat trigger below your level to catch anyone who falls off. Enable both flags.
 - **Lava / hazard pit** — Pair with a visual mesh and some ambient audio. Both flags on.
 - **NPC despawn zone** — Only enable `isKillingNPCs`. Useful for quietly removing NPCs that wander out of bounds without killing the player.
 - **Out-of-bounds wall** — Only enable `isKillingPlayer`. Stops players from sequence-breaking or leaving the map.
-
----
-
-## Gotchas
-
-- **Physics layers matter.** If your collider is on the wrong layer, `OnTriggerEnter` will never fire. Make sure the layer can interact with the player rig and NPC rigs. Marrow rigs use specific layers so double-check your Physics settings if the trigger isn't working.
-- The component is in the `SLZ.Bonelab` namespace and depends on `SLZ.Marrow.AI` for `TriggerRefProxy`, so you need the Marrow SDK in your project.
-
----
-
-## Namespace
-
-```
-SLZ.Bonelab
-```
